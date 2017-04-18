@@ -1,26 +1,28 @@
-var macAdress = "00:06:66:7D:83:BF";
+/* Adressen på vores Bluetooth-Dongle (Password er 1234). 
+ * MAC-addressen er unik til hver Bluetooth-dongle, så hvis vi bruger en anden skal MAC-adressen skiftes.
+ */
+var macAddress = "00:06:66:7D:83:BF";
 
-function init() {
-	
+function init(){
+	document.addEventListener("deviceready", onDeviceReady, false);
 }
-
-function onDeviceReady() {
-	bluetoothSerial.connect(macAdress, onConnect, onDisconnect);
+function onDeviceReady(){
+	bluetoothSerial.connect(macAddress, onConnect, onDisconnect);
 }
 function onConnect() {
-	bluetoothSerial.subscribe("\n", onMessage, subscribeFailed);
-	document.getElementByID("status").innerHTML="Connected to " + macAdress + ".";
-}
-function onDisconnect() {
-	alert("Disconnected");
-	getElementByID("status").innerHTML+="Disconnected.";
+    bluetoothSerial.subscribe("\n", onMessage, subscribeFailed);
+    document.getElementByID("statusDiv").innerHTML="Connected to " + macAddress + ".";        		
 }
 function onMessage(data) {
-	document.getElementByID("reply").innerHTML="Data: "+data;
+	document.getElementById("reply").innerHTML="Data: "+data;
 }
 function sendToArduino(data) {
-	bluetoothSerial.write(data);
+        bluetoothSerial.write(data);
+}
+function onDisconnect() {
+        alert("Disconnected");
+        statusDiv.innerHTML+="Disconnected.";
 }
 function subscribeFailed() {
-	alert("subscribe failed");
+        alert("subscribe failed");
 }

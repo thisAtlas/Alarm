@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="net.tigoe.simpleserial" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" >
-    <name>Bluetooth remote - Alarm</name>
+    <name>Bluetooth Remote - Alarm</name>
     <description>
-		I hope this works
+		App to connect to our alarm.
     </description>
     <content src="index.html" />
     <preference name="fullscreen" value="false" />
