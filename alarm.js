@@ -8,10 +8,12 @@ function init(){
 }
 function onDeviceReady(){
 	bluetoothSerial.connect(macAddress, onConnect, onDisconnect);
+	alert("device:ready");
 }
 function onConnect() {
     bluetoothSerial.subscribe("\n", onMessage, subscribeFailed);
-    document.getElementById("statusDiv").innerHTML="Connected to " + macAddress + ".";        		
+    document.getElementById("statusDiv").innerHTML="Connected to " + macAddress + ".";
+	alert("connected");
 }
 function onMessage(data) {
 	document.getElementById("reply").innerHTML="Data: "+data;
