@@ -4,9 +4,10 @@
 		<meta charset="utf-8"/>
 		<meta name="format-detection" content="telephone=no" />
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>	
+		<script type="text/javascript" src="cordova.js"></script>
 		<script type="text/javascript" src="alarm.js"></script>
-		<title>Bluetooth alarm</title>
+		<title>Bluetooth Alarm</title>
 		<style>
 			* {
 				font-family: Arial, Sans-serif;
@@ -14,19 +15,24 @@
 			body {
 				background-color:#E7EFF0;
 			}
-			#bdiv {
-				min-height: 200px;
+			#header, #bdiv, #status {
+				width:70%;
+				margin:auto;
 			}
-			#header {
-				text-align: center;
+			#header, #bdiv {
+				text-align:center;
+			}
+			#status {
+				text-align:center;
 			}
 		</style>
     </head>
     <body onload="onLoad()">
 		<div id="header"> 
-			<h3>Alarm</h1>
+			<h3>Bluetooth Alarm</h1>
 		</div>
 		<div id="bdiv">
+			
 		</div>
 		<div id="status">
 			<div id="fraArduino">Reply: </div>
