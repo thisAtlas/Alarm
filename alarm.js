@@ -2,20 +2,24 @@
  * MAC-addressen er unik til hver Bluetooth-dongle, så hvis vi bruger en anden skal MAC-adressen skiftes.
  */
 var macAddress = "00:06:66:7D:83:BF";
-
-var deadline = "nill";
-
+var num;
 
 function onLoad(){
 	document.addEventListener("deviceready", onDeviceReady, false);
 	
-	var num = Math.ceil(Math.random()*5);
-	document.getElementById("numDiv").innerHTML+=num + " ";
-	
 	date();
 	time();
+	setInterval(time, 1000);
+	numberGen();
+	console.log(num);
+	document.getElementById("numDiv").innerHTML+=num;
+	sendToArduino(num);
+}
+function numberGen() {
+	num = Math.ceil(Math.random()*5);
 }
 function date() {
+	document.getElementById("date").innerHTML="Today is ";
 	var d = new Date();
 	var weekday = ["Sunday", "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 	document.getElementById("date").innerHTML += weekday[d.getDay()] + ", the ";
@@ -31,19 +35,38 @@ function date() {
 	} else {
 		document.getElementById("date").innerHTML += "th ";
 	}
+	document.getElementById("date").innerHTML += "of "
+	var m = new Date();
+	var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+	document.getElementById("date").innerHTML += month[m.getMonth()] + " ";
 	
 	var year = new Date();
 	document.getElementById("date").innerHTML += year.getFullYear();
 }
 function time() {
+	document.getElementById("time").innerHTML = "The time is: ";
 	var t = new Date();
-	document.getElementById("time").innerHTML += t.getHours() + ":";
+	if(t.getHours()<10) {
+		document.getElementById("time").innerHTML += "0"+t.getHours()+":";
+	}else{
+		document.getElementById("time").innerHTML += t.getHours()+":";
+	}
+	if(t.getHours()==0) {
+		date();
+	}
 	var t2 = new Date();
-	document.getElementById("time").innerHTML += t2.getMinutes() + ":";
+	if(t2.getMinutes()<10) {
+		document.getElementById("time").innerHTML += "0"+t2.getMinutes()+":";
+	}else{
+		document.getElementById("time").innerHTML += t2.getMinutes()+":";
+	}
 	var t3 = new Date();
-	document.getElementById("time").innerHTML += t3.getSeconds() + ":";
+	if(t3.getSeconds()<10) {
+		document.getElementById("time").innerHTML += "0"+t3.getSeconds();
+	}else{
+		document.getElementById("time").innerHTML += t3.getSeconds();
+	}
 }
-
 /* Bluetooth funktionerne starter her. De er givet til os af lærer.
  */
 function onDeviceReady(){
@@ -54,27 +77,19 @@ function onDeviceReady(){
  * Arduino-kommandoen println().
  */
 function onConnect() {
-    bluetoothSerial.subscribe("\n", onMessage, subscribeFailed);
-    document.getElementById("statusDiv").innerHTML="Connected to " + macAddress + ".";        		
+	bluetoothSerial.subscribe("\n", onMessage, subscribeFailed);
+	document.getElementById("statusDiv").innerHTML="Connected to " + macAddress;        		
 }
-/* Data modtaget fra arduinoen vises i "reply".
- */
 function onMessage(data) {
 	document.getElementById("reply").innerHTML="Data: "+data;
-	document.getElementById("reply").innerHTML+=num;
-	sendToArduino(numb);
 }
-/* bluetoothSerial.write sender data af formen 
- * ArrayBuffer, string, array of integers, eller et Uint8Array.
- * I dette eksempel sendes en string 
- */
 function sendToArduino(data) {
-        bluetoothSerial.write(data);
+	bluetoothSerial.write(data);
 }
 function onDisconnect() {
-        alert("Disconnected");
-        document.getElementById("statusDiv").innerHTML+="Disconnected.";
+	alert("Disconnected");
+	document.getElementById("statusDiv").innerHTML="Disconnected.";
 }
 function subscribeFailed() {
-        alert("subscribe failed");
+	alert("subscribe failed");
 }
