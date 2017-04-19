@@ -1,35 +1,36 @@
-<!doctype HTML>
+<!DOCTYPE html>
 <html>
-	<head>
+    <head>
 		<meta charset="utf-8"/>
-		<meta name="format-detection" content="telephone=no"/>
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<script type="text/javascript" src="alarm.js"></script>
-		<title>Bluetooth-remote: Alarm</title>
+		<title>Bluetooth alarm</title>
 		<style>
 			* {
 				font-family: Arial, Sans-serif;
 			}
 			body {
-				background-color: #E7EFF0;
+				background-color:#E7EFF0;
 			}
-			#header, #bdiv, #reply {
-				width: 70%;
-				margin:auto;
+			#bdiv {
+				min-height: 200px;
 			}
 			#header {
 				text-align: center;
 			}
 		</style>
-	</head>
-	<body onload="init()">
-		<button onclick="init()">button</button>
+    </head>
+    <body onload="onLoad()">
+		<div id="header"> 
+			<h3>Alarm</h1>
+		</div>
 		<div id="bdiv">
-			<div id="header">
-				<h3>Alarm</h3>
-			</div>
-			<div id="reply">Reply: </div>
+		</div>
+		<div id="status">
+			<div id="fraArduino">Reply: </div>
 			<div id="statusDiv">Status: </div>
 		</div>
-	</body>
+    </body>
 </html>
