@@ -12,16 +12,10 @@ function onLoad(){
 	var num = Math.ceil(Math.random()*5);
 	document.getElementById("numDiv").innerHTML+=num + " ";
 	
-	clear();
 	date();
 	time();
 }
-function clear() {
-	document.getElementById("date").innerHTML="";
-	document.getElementById("time").innerHTML="";
-}
-function date() 
-	
+function date() {
 	var d = new Date();
 	var weekday = ["Sunday", "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 	document.getElementById("date").innerHTML += weekday[d.getDay()] + ", the ";
@@ -46,6 +40,8 @@ function time() {
 	document.getElementById("time").innerHTML += t.getHours() + ":";
 	var t2 = new Date();
 	document.getElementById("time").innerHTML += t2.getMinutes() + ":";
+	var t3 = new Date();
+	document.getElementById("time").innerHTML += t3.getSeconds() + ":";
 }
 
 /* Bluetooth funktionerne starter her. De er givet til os af lærer.
@@ -66,7 +62,6 @@ function onConnect() {
 function onMessage(data) {
 	document.getElementById("reply").innerHTML="Data: "+data;
 	document.getElementById("reply").innerHTML+=num;
-	var numb = parseFloat(num);
 	sendToArduino(numb);
 }
 /* bluetoothSerial.write sender data af formen 
