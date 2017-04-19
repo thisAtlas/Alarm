@@ -6,7 +6,7 @@ var macAddress = "00:06:66:7D:83:BF";
 function onLoad(){
 	document.addEventListener("deviceready", onDeviceReady, false);
 	var num = Math.ceil(Math.random()*5);
-	console.log(num);
+	getElementById("num").innerHTML+=num + " ";
 }
 
 
