@@ -13,10 +13,10 @@ function onLoad(){
 	numberGen();
 	console.log(num);
 	document.getElementById("numDiv").innerHTML+=num;
-	sendToArduino(num);
 }
 function numberGen() {
 	num = Math.ceil(Math.random()*5);
+	parseFloat(num);
 }
 function date() {
 	document.getElementById("date").innerHTML="Today is ";
@@ -78,7 +78,8 @@ function onDeviceReady(){
  */
 function onConnect() {
 	bluetoothSerial.subscribe("\n", onMessage, subscribeFailed);
-	document.getElementById("statusDiv").innerHTML="Connected to " + macAddress;        		
+	document.getElementById("statusDiv").innerHTML="Connected to " + macAddress;
+	sendToArduino(num);
 }
 function onMessage(data) {
 	document.getElementById("reply").innerHTML="Data: "+data;
