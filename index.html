@@ -1,42 +1,56 @@
 <!DOCTYPE html>
-<!-- Eksempel er udarbejdet med inspiration herfra: https://github.com/don/BluetoothSerial-->
 <html>
     <head>
 		<meta charset="utf-8"/>
 		<meta name="format-detection" content="telephone=no" />
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>	
-		<script type="text/javascript" src="cordova.js"></script> <!-- Ref til phonegaps javascript -->
-		<script type="text/javascript" src="alarm.js"></script> <!-- Ref til javascript dokumentet -->
-		<title>Bluetooth Remote</title>
-		<style> <!--Style-tagget indeholder css, så vores remote ser pæn ud.-->
+		<script type="text/javascript" src="cordova.js"></script>
+		<script type="text/javascript" src="alarm.js"></script>
+		<title>Alarm - Bluetooth remote</title>
+		<style>
 			* {
 				font-family: Arial, Sans-serif;
 			}
 			body {
-				background-color:#E7EFF0;
+				background-color: #090717;
+				margin-top: -0.5%;
 			}
 			#header, #bdiv, #status {
-				width:70%;
-				margin:auto;
+				color: #D0D0ED;
 			}
 			#header, #bdiv {
-				text-align:center;
+				width: 70%;
+				margin: auto;
+				text-align: center;
+			}
+			#header {
+				border-bottom: 2px solid red;
+				margin-bottom: 16px;
+			}
+			#bdiv {
+				font-size: 18px;
 			}
 			#status {
-				text-align:center;
+				width: 50%;
+				margin-bottom: 5px;
+				font-size: 12px;
+				position: fixed;
+				bottom: 0;
 			}
 		</style>
     </head>
-    <body onload="onLoad()"> <!--Loader en funktion i javascript sammen med dokumentet.-->
-		<div id="header"> 
-			<h3>Bluetooth Remote</h1>
+    <body onload="onLoad()">
+		<div id="header">
+			<p>Alarm - Bluetooth remote</p>
 		</div>
-		<div id="bdiv">
-			
+		<div id="bdiv"> <!-- "Knapper" der giver input til arduinoen. -->
+			<div id="set"></div>
+			<div id="upload">Upload Alarm</div>
 		</div>
-		<div id="status"> <!-- Elementer til at displaye modtaget data fra arduinoen -->
-			<div id="fraArduino">Reply: </div>
+			<br><br>
+		<div id="status"> <!-- Elementer til at displaye modtaget data fra arduinoen. -->
+			<div id="reply">Reply: </div>
 			<div id="statusDiv">Status: </div>
 		</div>
     </body>

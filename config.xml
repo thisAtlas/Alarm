@@ -4,10 +4,10 @@
 		Alarm - Bluetooth remote
 	</name>
     <description>
-        Bluetooth alarm remote
+        Bluetooth remote for our alarm
     </description>
     <author>
-       Moi
+       --
     </author>
     <content src="index.html" />
 

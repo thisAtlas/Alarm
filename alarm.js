@@ -5,7 +5,11 @@ var macAddress = "00:06:66:7D:83:BF";
 
 function onLoad(){
 	document.addEventListener("deviceready", onDeviceReady, false);
+	var num = Math.ceil(Math.random()*5);
+	console.log(num);
 }
+
+
 /* Bluetooth funktionerne starter her. De er givet til os af lærer.
  */
 function onDeviceReady(){
@@ -19,10 +23,15 @@ function onConnect() {
     bluetoothSerial.subscribe("\n", onMessage, subscribeFailed);
     document.getElementById("statusDiv").innerHTML="Connected to " + macAddress + ".";        		
 }
-/* Data modtaget fra arduinoen vises i "fraArduino".
+/* Data modtaget fra arduinoen vises i "reply".
  */
 function onMessage(data) {
-	document.getElementById("fraArduino").innerHTML="Data: "+data;
+	document.getElementById("reply").innerHTML="Data: "+data;
+	if (data="a") {
+		console.log("data=a");
+		getElementById("reply").innerHTML+=num;
+		sendToArduino(num);
+	}
 }
 /* bluetoothSerial.write sender data af formen 
  * ArrayBuffer, string, array of integers, eller et Uint8Array.
