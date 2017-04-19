@@ -27,11 +27,8 @@ function onConnect() {
  */
 function onMessage(data) {
 	document.getElementById("reply").innerHTML="Data: "+data;
-	if (data="a") {
-		console.log("data=a");
-		getElementById("reply").innerHTML+=num;
-		sendToArduino(num);
-	}
+	getElementById("reply").innerHTML+=num;
+	sendToArduino(num);
 }
 /* bluetoothSerial.write sender data af formen 
  * ArrayBuffer, string, array of integers, eller et Uint8Array.
