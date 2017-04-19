@@ -23,6 +23,41 @@
 			#header, #bdiv {
 				text-align:center;
 			}
+			#off {
+				background-color:#EE4E3F; 
+				border-color:#EE4E3F;
+			}
+			#forward, #back {
+				clear:both;
+				background-color:#62A4F0;
+				border-color:#62A4F0;
+			}
+			#right, #left {
+				float:left;
+				width:48%;
+				background-color:#62A4F0;
+				border-color:#62A4F0;
+			}
+			#speedDown, #speedUp {
+				background-color:#6CF09E;
+				border-color:#6CF09E;
+				float:left;
+				width:48%;
+			}
+			#off, #forward, #left, #right, #back, #speedDown, #speedUp {
+				margin-top: 10px;
+				margin-bottom: 10px;
+				min-width:70px;
+				min-height:40px;
+				padding-top: 20px;
+				border-style: outset;
+				border-width: 3px;
+				border-radius: 100px;
+			}
+			#off:active, #forward:active, #left:active, #right:active, #back:active, #speedDown:active, #speedUp:active {
+				background-color: orange;
+				border:3px inset orange;
+			}
 			#status {
 				text-align:center;
 			}
@@ -33,7 +68,19 @@
 			<h3>Bluetooth Remote</h1>
 		</div>
 		<div id="bdiv">
-			
+			<div id="buttons"> <!-- De forskellige knapper, aktiverer js funktioner der sender data til arduino. -->
+				<div id="off"> Power off </div>
+					<br>
+				<div id="speedDown"> Speed - </div>
+				<div id="speedUp"> Speed + </div>
+					<br>
+				<div id="forward"> Forward </div>
+					<br>
+				<div id="left"> Left turn </div>
+				<div id="right"> Right turn </div>
+					<br>
+				<div id="back"> Reverse </div>
+			</div>
 		</div>
 		<div id="status"> <!-- Elementer til at displaye modtaget data fra arduinoen -->
 			<div id="fraArduino">Reply: </div>
