@@ -6,7 +6,7 @@ var macAddress = "00:06:66:7D:83:BF";
 function onLoad(){
 	document.addEventListener("deviceready", onDeviceReady, false);
 	var num = Math.ceil(Math.random()*5);
-	getElementById("num").innerHTML+=num + " ";
+	document.getElementById("numDiv").innerHTML+=num + " ";
 }
 
 
@@ -27,7 +27,7 @@ function onConnect() {
  */
 function onMessage(data) {
 	document.getElementById("reply").innerHTML="Data: "+data;
-	getElementById("reply").innerHTML+=num;
+	document.getElementById("reply").innerHTML+=num;
 	sendToArduino(num);
 }
 /* bluetoothSerial.write sender data af formen 
