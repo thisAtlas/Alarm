@@ -8,7 +8,7 @@ function onDeviceReady(){
 }
 function onConnect() {
     bluetoothSerial.subscribe("\n", onMessage, subscribeFailed);
-    document.getElementByID("statusDiv").innerHTML="Connected to " + macAddress + ".";        		
+    document.getElementById("statusDiv").innerHTML="Connected to " + macAddress + ".";       		
 }
 function onMessage(data) {
 	document.getElementById("fraArduino").innerHTML="Data: "+data;
