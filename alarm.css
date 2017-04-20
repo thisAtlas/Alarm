@@ -1,0 +1,78 @@
+* {
+	font-family: Arial, Sans-serif;
+}
+body {
+	background-color: #090717;
+	margin-top: -0.5%;
+}
+#header, #bdiv, #status {
+	color: #D0D0ED;
+}
+#header, #bdiv {
+	width: 85%;
+	margin: auto;
+	text-align: center;
+}
+#header {
+	border-bottom: 1px solid red;
+	margin-bottom: 16px;
+	padding-bottom: 4px;
+}
+#bdiv {
+	font-size: 18px;
+}
+#status {
+	margin-bottom: 5px;
+	font-size: 12px;
+	position: fixed;
+	bottom: 0;
+}
+#premadeAlarms input {
+	background-color: white;
+	border: 2px outset red;
+	border-radius: 30px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+.switch input {display:none;}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+}
+input:checked + .slider {
+  background-color: #2196F3;
+}
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+#setAlarm {
+	font-size: 20px;
+}

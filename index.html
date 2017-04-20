@@ -7,37 +7,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>	
 		<script type="text/javascript" src="cordova.js"></script>
 		<script type="text/javascript" src="alarm.js"></script>
+		<link rel="stylesheet" type="text/css" href="alarm.css"/>
 		<title>Alarm - Bluetooth remote</title>
-		<style>
-			* {
-				font-family: Arial, Sans-serif;
-			}
-			body {
-				background-color: #090717;
-				margin-top: -0.5%;
-			}
-			#header, #bdiv, #status {
-				color: #D0D0ED;
-			}
-			#header, #bdiv {
-				width: 85%;
-				margin: auto;
-				text-align: center;
-			}
-			#header {
-				border-bottom: 2px solid red;
-				margin-bottom: 16px;
-			}
-			#bdiv {
-				font-size: 18px;
-			}
-			#status {
-				margin-bottom: 5px;
-				font-size: 12px;
-				position: fixed;
-				bottom: 0;
-			}
-		</style>
     </head>
     <body onload="onLoad()">
 		<div id="header">
@@ -46,7 +17,43 @@
 			<div id="time"></div>
 		</div>
 		<div id="bdiv"> <!-- "Knapper" der giver input til arduinoen. -->
-			<div id="set"></div>
+		
+			<label class="switch">
+				<input type="checkbox">
+				<div class="slider"></div>
+			</label>
+			<label class="switch">
+				<input type="checkbox">
+				<div class="slider"></div>
+			</label>
+			<label class="switch">
+				<input type="checkbox">
+				<div class="slider"></div>
+			</label>
+			<label class="switch">
+				<input type="checkbox">
+				<div class="slider"></div>
+			</label>
+			<label class="switch">
+				<input type="checkbox">
+				<div class="slider"></div>
+			</label>
+			
+				<br><br><br>
+			<div id="setAlarm">
+				Days:
+				<input id="aDays" type="number" min="0" max="31" onChange="numCap(this);" value="0"/>
+				Hours: 
+				<input id="aHour" type="number" min="0" max="23" onChange="numCap(this);" value="0"/>
+				Minute:
+				<input id="aMinute" type="number" min="00" max="59" onChange="numCap(this)" value="00"/>
+				Second: 
+				<input id="aSecond" type="number" min="00" max="59" onChange="numCap(this)" value="00"/>
+				&nbsp
+				<input id="aSwitch" type="button" value="Off" onclick="alarmSwitch()"/>
+			</div>
+				<br>
+			<input id="turnOff" type="button" value="SHUT OFF" onclick="disableAlarm();"/>
 			<div id="upload">Upload Alarm</div>
 		</div>
 			<br><br>
