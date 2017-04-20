@@ -1,34 +1,86 @@
 /* Adressen på vores Bluetooth-Dongle (Password er 1234). 
  * MAC-addressen er unik til hver Bluetooth-dongle, så hvis vi bruger en anden skal MAC-adressen skiftes.
  */
-var macAddress = "00:06:66:7D:98:60";
+var macAddress = "00:06:66:7D:83:BF";
 var num;
 //Har lavet følgende for at forkorte det at hente et element i HTML-en.
 var getID = function(value){ return document.getElementById( value ); };
+	var m15;
+	var m20;
+	var m30;
+	var m45;
+	var m60;
 
 function onLoad(){
 	document.addEventListener("deviceready", onDeviceReady, false);
 	
 	date();
 	time();
-	// Opdaterer 'uret' på skærmen hvert sekundt.
-	setInterval(time, 1000);
+	// Opdaterer loops en gang hvert sekundt.
+	setInterval(loop, 1000);
 	
 	numberGen();
 	
-	var	aHour = getID("aHour"),
+	/*var	aHour = getID("aHour"),
 		aMinute = getID("aMinute"),
 		aSecond = getID("aSecond"),
 		aSwitch = getID("aSwitch"),
 		aOff = getID("turnOff"),
 		refreshTime = 500,
-		alarmTimer = null;
+		alarmTimer = null;*/
+}
+function loop() {
+	date();
+	time();
+	premadeAlarms();
+}
+function premadeAlarms() {
+	m15 = getID("15min");
+	m20 = getID("20min");
+	m30 = getID("30min");
+	m45 = getID("45min");
+	m60 = getID("60min");
+	
+	if(m15.checked==true) {
+		console.log("15 minute alarmcycle is true");
+		sendToArduino('y');
+	}
+	if(m20.checked==true) {
+		console.log("20 minute alarmcycle is true");
+		sendToArduino('u');
+	}
+	if(m30.checked==true) {
+		console.log("30 minute alarmcycle is true");
+		sendToArduino('i');
+	}
+	if(m45.checked==true) {
+		console.log("45 minute alarmcycle is true");
+		sendToArduino('o');
+	}
+	if(m60.checked==true) {
+		console.log("60 minute alarmcycle is true");
+		sendToArduino('p');
+	}
 }
 function numberGen() {
 	num = Math.ceil(Math.random()*5);
 	parseFloat(num);
 	console.log(num);
 	getID("numDiv").innerHTML+=num;
+	if(num == 1) {
+		sendToArduino('1');
+	}else if(num == 2) {
+		sendToArduino('2');
+	}else if(num == 3) {
+		sendToArduino('3');
+	}else if(num == 4) {
+		sendToArduino('4');
+	}else if(num == 5) {
+		sendToArduino('5');
+	}else {
+		console.log("No number");
+		getID("numDiv").innerHTML="Reply: Something went wrong.";
+	}
 }
 function date() {
 	getID("date").innerHTML="Today is ";

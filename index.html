@@ -17,38 +17,37 @@
 			<div id="time"></div>
 		</div>
 		<div id="bdiv"> <!-- "Knapper" der giver input til arduinoen. -->
-		
 			<label class="switch">
-				<input type="checkbox">
+				<input type="checkbox" id="15min">
 				<div class="slider"></div>
 			</label>
 			<label class="switch">
-				<input type="checkbox">
+				<input type="checkbox" id="20min">
 				<div class="slider"></div>
 			</label>
 			<label class="switch">
-				<input type="checkbox">
+				<input type="checkbox" id="30min">
 				<div class="slider"></div>
 			</label>
 			<label class="switch">
-				<input type="checkbox">
+				<input type="checkbox" id="45min">
 				<div class="slider"></div>
 			</label>
 			<label class="switch">
-				<input type="checkbox">
+				<input type="checkbox" id="60min">
 				<div class="slider"></div>
 			</label>
 			
 				<br><br><br>
 			<div id="setAlarm">
 				Days:
-				<input id="aDays" type="number" min="0" max="31" onChange="numCap(this);" value="0"/>
+				<input id="aDays" type="number" min="0" max="31" onChange="numCap(this);"/>
 				Hours: 
-				<input id="aHour" type="number" min="0" max="23" onChange="numCap(this);" value="0"/>
+				<input id="aHour" type="number" min="0" max="23" onChange="numCap(this);"/>
 				Minute:
-				<input id="aMinute" type="number" min="00" max="59" onChange="numCap(this)" value="00"/>
+				<input id="aMinute" type="number" min="00" max="59" onChange="numCap(this)"/>
 				Second: 
-				<input id="aSecond" type="number" min="00" max="59" onChange="numCap(this)" value="00"/>
+				<input id="aSecond" type="number" min="00" max="59" onChange="numCap(this)"/>
 				&nbsp
 				<input id="aSwitch" type="button" value="Off" onclick="alarmSwitch()"/>
 			</div>
