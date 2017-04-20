@@ -32,8 +32,12 @@ function onLoad(){
 function loop() {
 	date();
 	time();
-	premadeAlarms();
+	//premadeAlarms();
 }
+//function premadeAlarms() {
+	
+//}
+/*
 function premadeAlarms() {
 	m15 = getID("15min");
 	m20 = getID("20min");
@@ -44,39 +48,50 @@ function premadeAlarms() {
 	if(m15.checked==true) {
 		console.log("15 minute alarmcycle is true");
 		sendToArduino('y');
+	}else if(m15.checked==false) {
+		sendToArduino('g');
 	}
 	if(m20.checked==true) {
 		console.log("20 minute alarmcycle is true");
 		sendToArduino('u');
+	}else if(m20.checked==false) {
+		sendToArduino('h');
 	}
 	if(m30.checked==true) {
 		console.log("30 minute alarmcycle is true");
 		sendToArduino('i');
+	}else if(m30.checked==false) {
+		sendToArduino('j');
 	}
 	if(m45.checked==true) {
 		console.log("45 minute alarmcycle is true");
 		sendToArduino('o');
+	}else if(m45.checked==false) {
+		sendToArduino('k');
 	}
 	if(m60.checked==true) {
 		console.log("60 minute alarmcycle is true");
 		sendToArduino('p');
+	}else if(m60.checked==false) {
+		sendToArduino('l');
 	}
 }
+*/
 function numberGen() {
 	num = Math.ceil(Math.random()*5);
 	parseFloat(num);
 	console.log(num);
 	getID("numDiv").innerHTML+=num;
 	if(num == 1) {
-		sendToArduino('1');
+		sendToArduino('z');
 	}else if(num == 2) {
-		sendToArduino('2');
+		sendToArduino('x');
 	}else if(num == 3) {
-		sendToArduino('3');
+		sendToArduino('c');
 	}else if(num == 4) {
-		sendToArduino('4');
+		sendToArduino('v');
 	}else if(num == 5) {
-		sendToArduino('5');
+		sendToArduino('b');
 	}else {
 		console.log("No number");
 		getID("numDiv").innerHTML="Reply: Something went wrong.";
