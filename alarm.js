@@ -23,6 +23,11 @@ function onLoad(){
 		aOff = getID("turnOff"),
 		refreshTime = 500,
 		alarmTimer = null;
+	
+	send();
+}
+function send() {
+	sendToArduino('4');
 }
 function numberGen() {
 	num = Math.ceil(Math.random()*5);
@@ -94,7 +99,7 @@ function onDeviceReady(){
 function onConnect() {
 	bluetoothSerial.subscribe("\n", onMessage, subscribeFailed);
 	getID("statusDiv").innerHTML="Connected to " + macAddress;
-	sendToArduino(num);
+	sendToArduino('3');
 }
 function onMessage(data) {
 	getID("reply").innerHTML="Data: "+data;
