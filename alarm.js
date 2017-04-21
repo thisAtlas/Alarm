@@ -121,6 +121,43 @@ function whichAlarm() {
 		console.log("no alarm");
 	}
 }
+function bluetoothResponse(data) {
+	if(data=='1') {
+		if(getID("oe1").style.display === 'none') {
+			getID("oe1").style.display = 'block';
+		}else {
+			getID("oe1").style.display = 'none';
+		}
+	}
+	if(data=='2') {
+		if(getID("oe2").style.display === 'none') {
+			getID("oe2").style.display = 'block';
+		}else {
+			getID("oe2").style.display = 'none';
+		}
+	}
+	if(data=='3') {
+		if(getID("oe3").style.display === 'none') {
+			getID("oe3").style.display = 'block';
+		}else {
+			getID("oe3").style.display = 'none';
+		}
+	}
+	if(data=='4') {
+		if(getID("oe4").style.display === 'none') {
+			getID("oe4").style.display = 'block';
+		}else {
+			getID("oe4").style.display = 'none';
+		}
+	}
+	if(data=='5') {
+		if(getID("oe5").style.display === 'none') {
+			getID("oe5").style.display = 'block';
+		}else {
+			getID("oe5").style.display = 'none';
+		}
+	}
+}
 function date() {
 	getID("date").innerHTML="Today is ";
 	var d = new Date();
@@ -186,8 +223,8 @@ function onConnect() {
 	getID("statusDiv").innerHTML="Connected to " + macAddress;
 }
 function onMessage(data) {
-	getID("reply").innerHTML="";
-	getID("reply").innerHTML+=data;
+	getID("reply").innerHTML=data;
+	bluetoothResponse(data);
 }
 function sendToArduino(data) {
 	console.log("Sent to arduino: "+data);
