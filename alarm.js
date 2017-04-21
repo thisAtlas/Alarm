@@ -35,7 +35,7 @@ function loop() {
 }
 function whatToSend() {
 	if (is15t == true) {
-		sendToArduino('a');
+		sendToArduino('ab');
 		console.log("sending 15");
 	}else if (is15t == false) {
 		sendToArduino('b');
