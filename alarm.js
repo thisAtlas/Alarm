@@ -2,43 +2,66 @@
  * MAC-addressen er unik til hver Bluetooth-dongle, så hvis vi bruger en anden skal MAC-adressen skiftes.
  */
 var macAddress = "00:06:66:7D:83:BF";
-var num;
 //Har lavet følgende for at forkorte det at hente et element i HTML-en.
 var getID = function(value){ return document.getElementById( value ); };
-	var m15;
-	var m20;
-	var m30;
-	var m45;
-	var m60;
+
+var m15, m20, m30, m45, m60;
+var is15t, is20t, is30t, is45t, is60t;
 
 function onLoad(){
 	document.addEventListener("deviceready", onDeviceReady, false);
+	getID("min").addEventListener("touchstart", whichAlarm, false);
 	
 	date();
 	time();
+	whichAlarm();
 	// Opdaterer loops en gang hvert sekundt.
 	setInterval(loop, 1000);
-	
-	numberGen();
-	
-	/*var	aHour = getID("aHour"),
-		aMinute = getID("aMinute"),
-		aSecond = getID("aSecond"),
-		aSwitch = getID("aSwitch"),
-		aOff = getID("turnOff"),
-		refreshTime = 500,
-		alarmTimer = null;*/
 }
 function loop() {
 	date();
 	time();
-	//premadeAlarms();
+	whichAlarm();
+	whatToSend();
 }
-//function premadeAlarms() {
-	
-//}
-/*
-function premadeAlarms() {
+function whatToSend() {
+	if (is15t == true) {
+		//sendToArduino('a');
+		console.log("sending 15");
+	}else if (is15t == false) {
+		//sendToArduino('b');
+		console.log("stopping 15");
+	}
+	if (is20t == true) {
+		//sendToArduino('c');
+		console.log("sending 20");
+	}else if (is20t == false) {
+		//sendToArduino('d');
+		console.log("stopping 20");
+	}
+	if (is30t == true) {
+		//sendToArduino('e');
+		console.log("sending 30");
+	}else if (is30t == false) {
+		//sendToArduino('f');
+	}
+	if (is45t == true) {
+		//sendToArduino('g');
+		console.log("sending 45");
+	}else if (is45t == false) {
+		//sendToArduino('h');
+		console.log("stopping 45");
+	}
+	if (is60t == true) {
+		//sendToArduino('i');
+		console.log("sending 60");
+	}else if (is60t == false) {
+		//sendToArduino('j');
+		console.log("stopping 60");
+	}
+}
+function whichAlarm() {
+	getID("whichAlarm").innerHTML="";
 	m15 = getID("15min");
 	m20 = getID("20min");
 	m30 = getID("30min");
@@ -46,55 +69,44 @@ function premadeAlarms() {
 	m60 = getID("60min");
 	
 	if(m15.checked==true) {
-		console.log("15 minute alarmcycle is true");
-		sendToArduino('y');
+		getID("whichAlarm").innerHTML+="15 minute cycle. ";
+		console.log("15min");
+		is15t = true;
 	}else if(m15.checked==false) {
-		sendToArduino('g');
+		is15t = false;
 	}
 	if(m20.checked==true) {
-		console.log("20 minute alarmcycle is true");
-		sendToArduino('u');
+		getID("whichAlarm").innerHTML+="20 minute cycle. ";
+		console.log("20min");
+		is20t = true;
 	}else if(m20.checked==false) {
-		sendToArduino('h');
+		is20t = false;
 	}
 	if(m30.checked==true) {
-		console.log("30 minute alarmcycle is true");
-		sendToArduino('i');
+		getID("whichAlarm").innerHTML+="30 minute cycle. ";
+		console.log("30min");
+		is30t = true;
 	}else if(m30.checked==false) {
-		sendToArduino('j');
+		is30t = false;
 	}
 	if(m45.checked==true) {
-		console.log("45 minute alarmcycle is true");
-		sendToArduino('o');
+		getID("whichAlarm").innerHTML+="45 minute cycle. ";
+		console.log("45min");
+		is45t = true;
 	}else if(m45.checked==false) {
-		sendToArduino('k');
+		is45t = false;
 	}
 	if(m60.checked==true) {
-		console.log("60 minute alarmcycle is true");
-		sendToArduino('p');
+		getID("whichAlarm").innerHTML+="60 minute cycle. ";
+		console.log("60min");
+		is60t = true;
 	}else if(m60.checked==false) {
-		sendToArduino('l');
+		is60t = false;
 	}
-}
-*/
-function numberGen() {
-	num = Math.ceil(Math.random()*5);
-	parseFloat(num);
-	console.log(num);
-	getID("numDiv").innerHTML+=num;
-	if(num == 1) {
-		sendToArduino('z');
-	}else if(num == 2) {
-		sendToArduino('x');
-	}else if(num == 3) {
-		sendToArduino('c');
-	}else if(num == 4) {
-		sendToArduino('v');
-	}else if(num == 5) {
-		sendToArduino('b');
-	}else {
-		console.log("No number");
-		getID("numDiv").innerHTML="Reply: Something went wrong.";
+	if (m15.checked==false && m20.checked==false && m30.checked==false && 
+		m45.checked==false && m60.checked==false){
+		getID("whichAlarm").innerHTML="No alarm selected.";
+		console.log("no alarm");
 	}
 }
 function date() {
@@ -147,7 +159,6 @@ function time() {
 	}
 }
 
-
 /* Bluetooth funktionerne starter her. De bruges når vi forbinder til bluetooth-enheden
  * på vores produkt.
  */
@@ -161,10 +172,9 @@ function onDeviceReady(){
 function onConnect() {
 	bluetoothSerial.subscribe("\n", onMessage, subscribeFailed);
 	getID("statusDiv").innerHTML="Connected to " + macAddress;
-	sendToArduino(num);
 }
 function onMessage(data) {
-	getID("reply").innerHTML="Data: "+data;
+	getID("reply").innerHTML=data;
 }
 function sendToArduino(data) {
 	bluetoothSerial.write(data);
