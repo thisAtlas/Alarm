@@ -11,19 +11,27 @@ var is15t, is20t, is30t, is45t, is60t;
 function onLoad(){
 	document.addEventListener("deviceready", onDeviceReady, false);
 	
-	getID("min").addEventListener("touchstart", whichAlarm, false);
+	getID("15min").addEventListener("touchstart", whatToSend, false);
+	getID("15min").addEventListener("click", whatToSend, false);
+	getID("20min").addEventListener("touchstart", whatToSend, false);
+	getID("20min").addEventListener("click", whatToSend, false);
+	getID("30min").addEventListener("touchstart", whatToSend, false);
+	getID("30min").addEventListener("click", whatToSend, false);
+	getID("45min").addEventListener("touchstart", whatToSend, false);
+	getID("45min").addEventListener("click", whatToSend, false);
+	getID("60min").addEventListener("touchstart", whatToSend, false);
+	getID("60min").addEventListener("click", whatToSend, false);
 	
 	date();
 	time();
 	whichAlarm();
 	// Opdaterer loops en gang hvert sekundt.
-	setInterval(loop, 1000);
+	setInterval(loop, 200);
 }
 function loop() {
 	date();
 	time();
 	whichAlarm();
-	whatToSend();
 }
 function whatToSend() {
 	if (is15t == true) {
@@ -176,6 +184,7 @@ function onConnect() {
 	getID("statusDiv").innerHTML="Connected to " + macAddress;
 }
 function onMessage(data) {
+	getID("reply").innerHTML="";
 	getID("reply").innerHTML+=data;
 }
 function sendToArduino(data) {
