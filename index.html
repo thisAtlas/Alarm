@@ -6,6 +6,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>	
 		<script type="text/javascript" src="cordova.js"></script>
+		<!-- Ref. til de eksteerne dokumenter: -->
 		<script type="text/javascript" src="alarm.js"></script>
 		<link rel="stylesheet" type="text/css" href="alarm.css"/>
 		<title>Alarm - Bluetooth remote</title>
@@ -16,7 +17,7 @@
 			<div id="date"></div>
 			<div id="time"></div>
 		</div>
-		<div id="bdiv"> <!-- "Knapper" der giver input til arduinoen. -->
+		<div id="bdiv"> <!-- Switches, der giver input til arduinoen. -->
 			<label class="switch">
 				<input type="checkbox" id="15min">
 				<div class="slider" id="min"></div>
@@ -38,13 +39,6 @@
 				<div class="slider"></div>
 			</label>
 			<div>Current alarm: <span id="whichAlarm"></span></div>
-			<div id="response">
-				<div id="oe1">&oslashvelse 1</div>
-				<div id="oe2">&oslashvelse 2</div>
-				<div id="oe3">&oslashvelse 3</div>
-				<div id="oe4">&oslashvelse 4</div>
-				<div id="oe5">&oslashvelse 5</div>
-			</div>
 		</div>
 			<br><br>
 		<div id="status"> <!-- Elementer til at displaye modtaget data fra arduinoen. -->

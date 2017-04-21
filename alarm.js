@@ -22,12 +22,14 @@ function onLoad(){
 	getID("60min").addEventListener("touchstart", sendToArduino('e'), false);
 	getID("60min").addEventListener("click", sendToArduino('e'), false);*/
 	
+	// Disse elementer loader "onLoad", så de er der med det samme,
+	// setInterval funktionen først loader nogle millisekunder efter siden loader.
 	date();
 	time();
 	whichAlarm();
 	whatToSend();
-	// Opdaterer loops en gang hvert sekundt.
-	setInterval(loop, 200);
+	// Opdaterer loop() en gang hvert sekundt.
+	setInterval(loop, 800);
 }
 function loop() {
 	date();
@@ -121,43 +123,6 @@ function whichAlarm() {
 		console.log("no alarm");
 	}
 }
-function bluetoothResponse(data) {
-	if(data=='1') {
-		if(getID("oe1").style.display === 'none') {
-			getID("oe1").style.display = 'block';
-		}else {
-			getID("oe1").style.display = 'none';
-		}
-	}
-	if(data=='2') {
-		if(getID("oe2").style.display === 'none') {
-			getID("oe2").style.display = 'block';
-		}else {
-			getID("oe2").style.display = 'none';
-		}
-	}
-	if(data=='3') {
-		if(getID("oe3").style.display === 'none') {
-			getID("oe3").style.display = 'block';
-		}else {
-			getID("oe3").style.display = 'none';
-		}
-	}
-	if(data=='4') {
-		if(getID("oe4").style.display === 'none') {
-			getID("oe4").style.display = 'block';
-		}else {
-			getID("oe4").style.display = 'none';
-		}
-	}
-	if(data=='5') {
-		if(getID("oe5").style.display === 'none') {
-			getID("oe5").style.display = 'block';
-		}else {
-			getID("oe5").style.display = 'none';
-		}
-	}
-}
 function date() {
 	getID("date").innerHTML="Today is ";
 	var d = new Date();
@@ -177,7 +142,8 @@ function date() {
 	}
 	getID("date").innerHTML += "of "
 	var m = new Date();
-	var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+	var month = ["January", "February", "March", "April", "May", "June", 
+				 "July", "August", "September", "October", "November", "December"];
 	getID("date").innerHTML += month[m.getMonth()] + " ";
 	
 	var year = new Date();
@@ -224,7 +190,6 @@ function onConnect() {
 }
 function onMessage(data) {
 	getID("reply").innerHTML=data;
-	bluetoothResponse(data);
 }
 function sendToArduino(data) {
 	console.log("Sent to arduino: "+data);
