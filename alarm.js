@@ -10,6 +10,7 @@ var is15t, is20t, is30t, is45t, is60t;
 
 function onLoad(){
 	document.addEventListener("deviceready", onDeviceReady, false);
+	
 	getID("min").addEventListener("touchstart", whichAlarm, false);
 	
 	date();
@@ -174,7 +175,7 @@ function onConnect() {
 	getID("statusDiv").innerHTML="Connected to " + macAddress;
 }
 function onMessage(data) {
-	getID("reply").innerHTML=data;
+	getID("reply").innerHTML+=data;
 }
 function sendToArduino(data) {
 	bluetoothSerial.write(data);
