@@ -27,37 +27,38 @@ function loop() {
 }
 function whatToSend() {
 	if (is15t == true) {
-		//sendToArduino('a');
+		sendToArduino('a');
 		console.log("sending 15");
 	}else if (is15t == false) {
-		//sendToArduino('b');
+		sendToArduino('b');
 		console.log("stopping 15");
 	}
 	if (is20t == true) {
-		//sendToArduino('c');
+		sendToArduino('c');
 		console.log("sending 20");
 	}else if (is20t == false) {
-		//sendToArduino('d');
+		sendToArduino('d');
 		console.log("stopping 20");
 	}
 	if (is30t == true) {
-		//sendToArduino('e');
+		sendToArduino('e');
 		console.log("sending 30");
 	}else if (is30t == false) {
-		//sendToArduino('f');
+		sendToArduino('f');
+		console.log("stopping 30");
 	}
 	if (is45t == true) {
-		//sendToArduino('g');
+		sendToArduino('g');
 		console.log("sending 45");
 	}else if (is45t == false) {
-		//sendToArduino('h');
+		sendToArduino('h');
 		console.log("stopping 45");
 	}
 	if (is60t == true) {
-		//sendToArduino('i');
+		sendToArduino('i');
 		console.log("sending 60");
 	}else if (is60t == false) {
-		//sendToArduino('j');
+		sendToArduino('j');
 		console.log("stopping 60");
 	}
 }
