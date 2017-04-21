@@ -11,20 +11,21 @@ var is15t, is20t, is30t, is45t, is60t;
 function onLoad(){
 	document.addEventListener("deviceready", onDeviceReady, false);
 	
-	getID("15min").addEventListener("touchstart", whatToSend, false);
-	getID("15min").addEventListener("click", whatToSend, false);
-	getID("20min").addEventListener("touchstart", whatToSend, false);
-	getID("20min").addEventListener("click", whatToSend, false);
-	getID("30min").addEventListener("touchstart", whatToSend, false);
-	getID("30min").addEventListener("click", whatToSend, false);
-	getID("45min").addEventListener("touchstart", whatToSend, false);
-	getID("45min").addEventListener("click", whatToSend, false);
-	getID("60min").addEventListener("touchstart", whatToSend, false);
-	getID("60min").addEventListener("click", whatToSend, false);
+	/*getID("15min").addEventListener("touchstart", sendToArduino('a'), false);
+	getID("15min").addEventListener("click", sendToArduino('a'), false);
+	getID("20min").addEventListener("touchstart", sendToArduino('b'), false);
+	getID("20min").addEventListener("click", sendToArduino('b'), false);
+	getID("30min").addEventListener("touchstart", sendToArduino('c'), false);
+	getID("30min").addEventListener("click", sendToArduino('c'), false);
+	getID("45min").addEventListener("touchstart", sendToArduino('d'), false);
+	getID("45min").addEventListener("click", sendToArduino('d'), false);
+	getID("60min").addEventListener("touchstart", sendToArduino('e'), false);
+	getID("60min").addEventListener("click", sendToArduino('e'), false);*/
 	
 	date();
 	time();
 	whichAlarm();
+	whatToSend();
 	// Opdaterer loops en gang hvert sekundt.
 	setInterval(loop, 200);
 }
@@ -32,43 +33,44 @@ function loop() {
 	date();
 	time();
 	whichAlarm();
+	whatToSend();
 }
 function whatToSend() {
 	if (is15t == true) {
-		sendToArduino('ab');
+		sendToArduino('a');
 		console.log("sending 15");
-	}else if (is15t == false) {
-		sendToArduino('b');
-		console.log("stopping 15");
-	}
+	}//else if (is15t == false) {
+		//sendToArduino('f');
+		//console.log("stopping 15");
+	//}
 	if (is20t == true) {
-		sendToArduino('c');
+		sendToArduino('b');
 		console.log("sending 20");
-	}else if (is20t == false) {
-		sendToArduino('d');
-		console.log("stopping 20");
-	}
+	}//else if (is20t == false) {
+		//sendToArduino('g');
+		//console.log("stopping 20");
+	//}
 	if (is30t == true) {
-		sendToArduino('e');
+		sendToArduino('c');
 		console.log("sending 30");
-	}else if (is30t == false) {
-		sendToArduino('f');
-		console.log("stopping 30");
-	}
+	}//else if (is30t == false) {
+		//sendToArduino('h');
+		//console.log("stopping 30");
+	//}
 	if (is45t == true) {
-		sendToArduino('g');
+		sendToArduino('d');
 		console.log("sending 45");
-	}else if (is45t == false) {
-		sendToArduino('h');
-		console.log("stopping 45");
-	}
+	}//else if (is45t == false) {
+		//sendToArduino('i');
+		//console.log("stopping 45");
+	//}
 	if (is60t == true) {
-		sendToArduino('i');
+		sendToArduino('e');
 		console.log("sending 60");
-	}else if (is60t == false) {
-		sendToArduino('j');
-		console.log("stopping 60");
-	}
+	}//else if (is60t == false) {
+		//sendToArduino('j');
+		//console.log("stopping 60");
+	//}
 }
 function whichAlarm() {
 	getID("whichAlarm").innerHTML="";
@@ -188,6 +190,7 @@ function onMessage(data) {
 	getID("reply").innerHTML+=data;
 }
 function sendToArduino(data) {
+	console.log("Sent to arduino: "+data);
 	bluetoothSerial.write(data);
 }
 function onDisconnect() {
