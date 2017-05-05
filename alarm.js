@@ -1,80 +1,61 @@
 /* Adressen på vores Bluetooth-Dongle (Password er 1234). 
- * MAC-addressen er unik til hver Bluetooth-dongle, så hvis vi bruger en anden skal MAC-adressen skiftes.
+ * MAC-addressen er unik til hver Bluetooth-dongle, 
+ * så hvis vi bruger en anden skal MAC-adressen skiftes.
  */
 var macAddress = "00:06:66:7D:83:BF";
 //Har lavet følgende for at forkorte det at hente et element i HTML-en.
 var getID = function(value){ return document.getElementById( value ); };
 
+//Variabler der bruges til a) at hente data fra HTML-dokumentet, 
+//og b) tjekke om nogle switches er tændte.
 var m15, m20, m30, m45, m60;
 var is15t, is20t, is30t, is45t, is60t;
 
 function onLoad(){
 	document.addEventListener("deviceready", onDeviceReady, false);
-	
-	/*getID("15min").addEventListener("touchstart", sendToArduino('a'), false);
-	getID("15min").addEventListener("click", sendToArduino('a'), false);
-	getID("20min").addEventListener("touchstart", sendToArduino('b'), false);
-	getID("20min").addEventListener("click", sendToArduino('b'), false);
-	getID("30min").addEventListener("touchstart", sendToArduino('c'), false);
-	getID("30min").addEventListener("click", sendToArduino('c'), false);
-	getID("45min").addEventListener("touchstart", sendToArduino('d'), false);
-	getID("45min").addEventListener("click", sendToArduino('d'), false);
-	getID("60min").addEventListener("touchstart", sendToArduino('e'), false);
-	getID("60min").addEventListener("click", sendToArduino('e'), false);*/
-	
 	// Disse elementer loader "onLoad", så de er der med det samme,
 	// setInterval funktionen først loader nogle millisekunder efter siden loader.
 	date();
 	time();
 	whichAlarm();
 	whatToSend();
-	// Opdaterer loop() en gang hvert sekundt.
+	// Opdaterer loop() en gang hver x milisekundter.
 	setInterval(loop, 800);
 }
 function loop() {
+	// loop() kører de forskellige funktioner ligesom onLoad().
 	date();
 	time();
 	whichAlarm();
 	whatToSend();
 }
 function whatToSend() {
+	/* Bruger data fra whichAlarm() til at bestemme hvilken data der sendes til arduino.
+	 * Når det er bestemt køres bluetooth-funktionen "sendToArduino()".
+	 */
 	if (is15t == true) {
 		sendToArduino('a');
 		console.log("sending 15");
-	}//else if (is15t == false) {
-		//sendToArduino('f');
-		//console.log("stopping 15");
-	//}
+	}
 	if (is20t == true) {
 		sendToArduino('b');
 		console.log("sending 20");
-	}//else if (is20t == false) {
-		//sendToArduino('g');
-		//console.log("stopping 20");
-	//}
+	}
 	if (is30t == true) {
 		sendToArduino('c');
 		console.log("sending 30");
-	}//else if (is30t == false) {
-		//sendToArduino('h');
-		//console.log("stopping 30");
-	//}
+	}
 	if (is45t == true) {
 		sendToArduino('d');
 		console.log("sending 45");
-	}//else if (is45t == false) {
-		//sendToArduino('i');
-		//console.log("stopping 45");
-	//}
+	}
 	if (is60t == true) {
 		sendToArduino('e');
 		console.log("sending 60");
-	}//else if (is60t == false) {
-		//sendToArduino('j');
-		//console.log("stopping 60");
-	//}
+	}
 }
 function whichAlarm() {
+	//Denne funktion finder ud af hvilke alarmer er tændte.
 	getID("whichAlarm").innerHTML="";
 	m15 = getID("15min");
 	m20 = getID("20min");
@@ -82,6 +63,8 @@ function whichAlarm() {
 	m45 = getID("45min");
 	m60 = getID("60min");
 	
+	//Følgende statements tjekker hvilke alarmer er tændte ud fra ID'en af HTML-elementerne.
+	//Derefter ændrer den på variabler, så whatToSend() ved hvilke alarmer er tændte og slukkede.
 	if(m15.checked==true) {
 		getID("whichAlarm").innerHTML+="15 minute cycle. ";
 		console.log("15min");
@@ -117,6 +100,7 @@ function whichAlarm() {
 	}else if(m60.checked==false) {
 		is60t = false;
 	}
+	//- Hvis alle alarmer er slukkede.
 	if (m15.checked==false && m20.checked==false && m30.checked==false && 
 		m45.checked==false && m60.checked==false){
 		getID("whichAlarm").innerHTML="No alarm selected.";
@@ -124,6 +108,7 @@ function whichAlarm() {
 	}
 }
 function date() {
+	//Funktione til at skrive datoen på skærmen.
 	getID("date").innerHTML="Today is ";
 	var d = new Date();
 	var weekday = ["Sunday", "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
@@ -150,6 +135,7 @@ function date() {
 	getID("date").innerHTML += year.getFullYear();
 }
 function time() {
+	//Funktion til at skrive tidspunktet på skærmen.
 	getID("time").innerHTML = "The time is: ";
 	var t = new Date();
 	if(t.getHours()<10) {
@@ -173,14 +159,14 @@ function time() {
 		getID("time").innerHTML += t3.getSeconds();
 	}
 }
-
 /* Bluetooth funktionerne starter her. De bruges når vi forbinder til bluetooth-enheden
- * på vores produkt.
+ * på vores produkt. onDeviceReady() kører pga. eventListeneren i onLoad(), som aktiverer
+ * når devicen siger at den er klar.
  */
 function onDeviceReady(){
 	bluetoothSerial.connect(macAddress, onConnect, onDisconnect);
 }
-/* I onConnect() kaldes bluetoothSerial.subscribe, der kaldes når data modtages.
+/* I onConnect() bruges bluetoothSerial.subscribe, der kaldes når data modtages.
  * Data skal sendes med et slut tegn. I dette eksempel er det \n, som indgår i
  * Arduino-kommandoen println().
  */
@@ -192,6 +178,7 @@ function onMessage(data) {
 	getID("reply").innerHTML=data;
 }
 function sendToArduino(data) {
+	//Denne funktion bruger bluetoothSerial.write(data) til at sende data til arduino.
 	console.log("Sent to arduino: "+data);
 	bluetoothSerial.write(data);
 }

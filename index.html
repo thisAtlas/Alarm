@@ -11,9 +11,11 @@
 		<link rel="stylesheet" type="text/css" href="alarm.css"/>
 		<title>Alarm - Bluetooth remote</title>
     </head>
-    <body onload="onLoad()">
+    <body onload="onLoad()"> <!--Loader javascript "onLoad()"-funktionen 
+								 sammen med <body> elementet.-->
 		<div id="header">
 			<p>Alarm - Bluetooth remote</p>
+			<!-- Elementer der viser dato og klokkeslæt -->
 			<div id="date"></div>
 			<div id="time"></div>
 		</div>
@@ -38,6 +40,7 @@
 				<input type="checkbox" id="60min">
 				<div class="slider"></div>
 			</label>
+			<!-- Element der viser hvilken alarm er tændt. -->
 			<div>Current alarm: <span id="whichAlarm"></span></div>
 		</div>
 			<br><br>
